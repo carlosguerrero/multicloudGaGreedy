@@ -33,9 +33,15 @@ class RESULTS:
         
         self.outputCSV = open(self.file_path+'/execution_data.csv', 'wb')
         self.outputCSVgreedy = open(self.file_path+'/greedy_execution_data.csv', 'wb')
+        self.outputCSVga = open(self.file_path+'/ga_execution_data.csv', 'wb')
+        
         strTitle = "config;maxrepair;minrepair;meanrepair;singlerepair;maxlat;minlat;meanlat;singlelat;maxcost;mincost;meancost;singlecost;maxvm;minvm;meanvm;singlevm;maxcont;mincont;meancont;singlecont"
         self.outputCSV.write(strTitle)
         self.outputCSV.write("\n")
+        
+        strTitle = "config;singlerepair;singlelat;singlecost"
+        self.outputCSVga.write(strTitle)
+        self.outputCSVga.write("\n")
 
         strTitle = "greedy;case;singlerepair;singlelat;singlecost"
         self.outputCSVgreedy.write(strTitle)
@@ -47,6 +53,11 @@ class RESULTS:
         strCSV = strConfig +';'+ str(self.mttr['max'][-1])+';'+str(self.mttr['min'][-1])+';'+str(self.mttr['mean'][-1])+';'+str(self.mttr['sfit'][-1])+';'+ str(self.latency['max'][-1])+';'+str(self.latency['min'][-1])+';'+str(self.latency['mean'][-1])+';'+str(self.latency['sfit'][-1])+';'+ str(self.cost['max'][-1])+';'+str(self.cost['min'][-1])+';'+str(self.cost['mean'][-1])+';'+str(self.cost['sfit'][-1])+';'+ str(self.vmNumber['max'][-1])+';'+str(self.vmNumber['min'][-1])+';'+str(self.vmNumber['mean'][-1])+';'+str(self.vmNumber['sfit'][-1])+';'+ str(self.containerNumber['max'][-1])+';'+str(self.containerNumber['min'][-1])+';'+str(self.containerNumber['mean'][-1])+';'+str(self.containerNumber['sfit'][-1])
         self.outputCSV.write(strCSV)
         self.outputCSV.write("\n")
+        
+        
+        strCSV = strConfig +';'+str(self.mttr['sfit'][-1])+';'+str(self.latency['sfit'][-1])+';'+str(self.cost['sfit'][-1])
+        self.outputCSVga.write(strCSV)
+        self.outputCSVga.write("\n")
         
     def storeCSVGreedy(self,strCSV):
         self.outputCSVgreedy.write(strCSV)
@@ -203,7 +214,7 @@ class RESULTS:
      
             
 
-    def plotfitEvoluation(self,dataSerie,title,ylabel,seriesToPlot):
+    def plotfitEvoluation(self,dataSerie,title,ylabel,seriesToPlot,minYaxes):
         
         font = {'size'   : 18}
 
@@ -244,11 +255,15 @@ class RESULTS:
             if 'min' in seriesToPlot:
                 ax.plot(mydataSerie['min'], label='min', linewidth=2.5,color='red',marker='^',markersize=10,markevery=30)
             if 'single' in seriesToPlot:
-                ax.plot(mydataSerie['sfit'], label='single', linewidth=2.5,color='blue',marker='s',markersize=10,markevery=30)    
+                ax.plot(mydataSerie['sfit'], label='weighted', linewidth=2.5,color='blue',marker='s',markersize=10,markevery=30)    
             plt.legend(loc="upper center", ncol=3, fontsize=14) 
         #upper, arriba    lower, abajo   center, centro    left, izquierda y    right, derecha
             #plt.legend()
        #    plt.show()
+       
+            plt.ylim(ymin=minYaxes[plotId])
+       
+       
             plt.grid()
             fig.savefig(self.file_path+'/'+self.idString+dataSerie[plotId]+'.pdf')
             plt.close(fig)
@@ -281,9 +296,9 @@ class RESULTS:
 
             ax.scatter(a, b, c, color='blue', marker="o")
     
-            ax.set_xlabel('mttr', fontsize=18)
+            ax.set_xlabel('repair', fontsize=18)
             ax.set_ylabel('latency', fontsize=18)
-            ax.set_zlabel('cost', fontsize=18)
+            ax.set_zlabel('cost', fontsize=18,rotation=90)
         
             fig.savefig(self.file_path+'/pareto-gen'+str(generationNum)+'.pdf')
             plt.close(fig)
@@ -295,3 +310,8 @@ class RESULTS:
         output = open(self.file_path+'/'+self.idString+'data.pkl', 'wb')
         pickle.dump(paretoResults, output)
         output.close()
+
+    def closeCSVs(self):
+        self.outputCSV.close()
+        self.outputCSVga.close()
+        self.outputCSVgreedy.close()

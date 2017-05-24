@@ -95,14 +95,32 @@ for value in [1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0]:
                 title = ['Repair time','Latency','Cost','Virtual machines', 'Containers']
                 ylabel = ['Time units (t)','Time units (t)','Cost units (c)','vm number','container number']
                 seriesToPlot = ['mean','min','single']
+                minYaxes = [-100,-5,0,0,0]
                 
-                res.plotparetoEvolution(paretoResults)
+                res.plotfitEvoluation(dataSerie,title,ylabel,seriesToPlot,minYaxes)
 
-                res.plotfitEvoluation(dataSerie,title,ylabel,seriesToPlot)
+            
+                dataSerie = ['mttr','latency','cost','vm','container']
+                title = ['Repair time','Latency','Cost','Virtual machines', 'Containers']
+                ylabel = ['Time units (t)','Time units (t)','Cost units (c)','vm number','container number']
+                seriesToPlot = ['min','single']
+                minYaxes = [-100,-5,0,0,0]
+                
+                res.idString ="2"+res.idString
+                res.plotfitEvoluation(dataSerie,title,ylabel,seriesToPlot,minYaxes)
+                
+                
+                
+                res.plotparetoEvolution(paretoResults)               
+                
+                
+                
+                
                 
                 
     
-res.outputCSV.close()
+res.closeCSVs()
+
     
 
 

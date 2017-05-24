@@ -68,12 +68,20 @@ class SYSTEMMODEL:
 
         self.numberProviders = 3
         
-        #definimos las "plantillas" de máquinas
+#        #definimos las "plantillas" de máquinas
+#        self.vminstancesTypes = []
+#        self.vminstancesTypes.append({"provider": 0, "name": "tinny", "capacity" : 100.0 * capacitymultiplier, "failrate": 0.025, "cost": {"running": 3.0 * costmultiplier, "usage": 0.0 * costmultiplier, "storage": 0.0 * costmultiplier}})
+#        self.vminstancesTypes.append({"provider": 0, "name": "small", "capacity" : 200.0 * capacitymultiplier, "failrate": 0.025, "cost": {"running": 8.0 * costmultiplier, "usage": 0.0 * costmultiplier, "storage": 0.0 * costmultiplier}})
+#        self.vminstancesTypes.append({"provider": 1, "name": "medium", "capacity" : 400.0  * capacitymultiplier, "failrate": 0.025, "cost": {"running": 0.0 * costmultiplier, "usage": 10.0 * costmultiplier, "storage": 1.0 * costmultiplier}})
+#        self.vminstancesTypes.append({"provider": 2, "name": "big", "capacity" : 800.0 * capacitymultiplier, "failrate": 0.025, "cost": {"running": 0.0 * costmultiplier, "usage": 10.0 * costmultiplier, "storage": 0.0 * costmultiplier}})
+
         self.vminstancesTypes = []
-        self.vminstancesTypes.append({"provider": 0, "name": "tinny", "capacity" : 100.0 * capacitymultiplier, "failrate": 0.025, "cost": {"running": 3.0 * costmultiplier, "usage": 0.0 * costmultiplier, "storage": 0.0 * costmultiplier}})
-        self.vminstancesTypes.append({"provider": 0, "name": "small", "capacity" : 200.0 * capacitymultiplier, "failrate": 0.025, "cost": {"running": 8.0 * costmultiplier, "usage": 0.0 * costmultiplier, "storage": 0.0 * costmultiplier}})
-        self.vminstancesTypes.append({"provider": 1, "name": "medium", "capacity" : 400.0  * capacitymultiplier, "failrate": 0.025, "cost": {"running": 0.0 * costmultiplier, "usage": 10.0 * costmultiplier, "storage": 1.0 * costmultiplier}})
-        self.vminstancesTypes.append({"provider": 2, "name": "big", "capacity" : 800.0 * capacitymultiplier, "failrate": 0.025, "cost": {"running": 0.0 * costmultiplier, "usage": 10.0 * costmultiplier, "storage": 0.0 * costmultiplier}})
+        self.vminstancesTypes.append({"provider": 0, "name": "tinny", "capacity" : 100.0 * capacitymultiplier, "failrate": 0.025, "cost": {"running": 100.0 * costmultiplier, "usage": 0.0 * costmultiplier, "storage": 0.0 * costmultiplier}})
+        self.vminstancesTypes.append({"provider": 0, "name": "small", "capacity" : 200.0 * capacitymultiplier, "failrate": 0.025, "cost": {"running": 150.0 * costmultiplier, "usage": 0.0 * costmultiplier, "storage": 0.0 * costmultiplier}})
+        self.vminstancesTypes.append({"provider": 1, "name": "medium", "capacity" : 400.0  * capacitymultiplier, "failrate": 0.025, "cost": {"running": 250.0 * costmultiplier, "usage": 0.0 * costmultiplier, "storage": 0.0 * costmultiplier}})
+        self.vminstancesTypes.append({"provider": 2, "name": "big", "capacity" : 800.0 * capacitymultiplier, "failrate": 0.025, "cost": {"running": 1000.0 * costmultiplier, "usage": 0.0 * costmultiplier, "storage": 0.0 * costmultiplier}})
+
+
         
         #asignamos un tipo/plantilla de máquina a cada uno de los nodos del sistema
         #igual número de máquinas de cada tipo
